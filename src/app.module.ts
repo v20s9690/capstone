@@ -10,7 +10,7 @@ import { AccountModule } from "./account/account.module";
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: "mariadb",
-    host: "40.121.88.111",
+    host: "localhost",
     port: 3306,
     username: "root",
     password: "root",

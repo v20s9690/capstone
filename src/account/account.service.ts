@@ -4,7 +4,7 @@ import { Account } from '../types/account.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
-export class AccountService {s
+export class AccountService {
   constructor(@InjectRepository(Account) private accountRepository: Repository<Account>) {}
 
   async findOne(id: string, password: string): Promise<Account> {
