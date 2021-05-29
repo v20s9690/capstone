@@ -5,7 +5,8 @@ import { AccountService } from '../account/account.service';
 //로그인을 위한 인증 단계
 @Injectable()
 export class AuthenticatorService {
-  sha256key: any = process.env.SECRET_KEY || crypto.getRandomValues(new Int8Array(32));
+  sha256key: any = process.env.SECRET_KEY;
+    //|| crypto.getRandomValues(new Int8Array(32));
   constructor(private accountService: AccountService) {}
 
   public async authenticate(id: string, password: string): Promise<string | undefined> {
