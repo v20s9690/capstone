@@ -16,7 +16,7 @@ import { OrderController } from "./order/order.controller";
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: "mysql",
-    host: "13.72.64.183",
+    host: "localhost",
     port: 3306,
     username: "root",
     password: "root",
