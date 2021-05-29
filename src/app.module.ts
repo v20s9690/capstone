@@ -9,11 +9,14 @@ import { AccountModule } from "./account/account.module";
 import { MenuController } from "./menu/menu.controller";
 import { MenuService } from "./menu/menu.service";
 import { MenuModule } from "./menu/menu.module";
+import { OrderModule } from "./order/order.module";
+import { OrderService } from "./order/order.service";
+import { OrderController } from "./order/order.controller";
 
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: "mysql",
-    host: "localhost",
+    host: "13.72.64.183",
     port: 3306,
     username: "root",
     password: "root",
@@ -21,11 +24,11 @@ import { MenuModule } from "./menu/menu.module";
     entities: ["dist/**/*.entity{.ts,.js}"],
     synchronize: true
   }),
-    AccountModule, MenuModule
+    AccountModule, MenuModule, OrderModule
   ],
   exports: [TypeOrmModule],
-  controllers: [AppController, LoginController, MenuController],
-  providers: [AppService, AuthenticatorService, AccountService, MenuService]
+  controllers: [AppController, LoginController, MenuController, OrderController],
+  providers: [AppService, AuthenticatorService, AccountService, MenuService, OrderService]
 })
 export class AppModule {
 }
