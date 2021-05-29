@@ -6,6 +6,9 @@ import { AuthenticatorService } from "./authenticator/authenticator.service";
 import { AccountService } from "./account/account.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { AccountModule } from "./account/account.module";
+import { MenuController } from "./menu/menu.controller";
+import { MenuService } from "./menu/menu.service";
+import { MenuModule } from "./menu/menu.module";
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -18,11 +21,11 @@ import { AccountModule } from "./account/account.module";
     entities: ["dist/**/*.entity{.ts,.js}"],
     synchronize: true
   }),
-    AccountModule
+    AccountModule, MenuModule
   ],
   exports: [TypeOrmModule],
-  controllers: [AppController, LoginController],
-  providers: [AppService, AuthenticatorService, AccountService]
+  controllers: [AppController, LoginController, MenuController],
+  providers: [AppService, AuthenticatorService, AccountService, MenuService]
 })
 export class AppModule {
 }

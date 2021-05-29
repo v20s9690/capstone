@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Req } from "@nestjs/common";
+import { Controller, Get, Param, Post, Req } from "@nestjs/common";
 import { Request } from "express";
 import { MenuService } from "./menu.service";
 import { Menu } from "../types/menu.entity";
@@ -8,7 +8,12 @@ import { CategoryMenus, SimpleMenu } from "../types/category-menus.class";
 export class MenuController {
   constructor(private menuService: MenuService) {}
 
-  @Get('/category/{:category}')
+  @Get()
+  category(@Req() request): string{
+    return "hello world";
+  }
+
+  @Get('category/:category')
   async categoryAndMenus(@Req() request: Request): Promise<string> {
     let res = { result: []};
     const categoryType = request.params.category;
