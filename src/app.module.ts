@@ -18,7 +18,7 @@ import { OrderController } from "./order/order.controller";
     type: "mysql",
     host: "localhost",
     port: 3306,
-    username: "root",
+    username: "capstone",
     password: "root",
     database: "capstone",
     entities: ["dist/**/*.entity{.ts,.js}"],
