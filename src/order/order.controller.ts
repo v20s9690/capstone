@@ -53,12 +53,12 @@ export class OrderController {
 
   @Post('getorder') // 받은 주문을 프론트(테이블)에게 배열 형태로 받아온다.
   async getOrder(@Req() request: Request): Promise<string> {
-    const reqOrder = JSON.parse(request.body);
-    reqOrder.order.forEach(value => {
+    const reqOrder = JSON.parse(request.body["result"]);
+    reqOrder.forEach((order: SimpleOrder) => {
       const orderEntity = new Order();
-      orderEntity.menu = value.menu;
-      orderEntity.price = value.price;
-      orderEntity.qty = value.qty;
+      orderEntity.menu = order.menu;
+      orderEntity.price = order.price;
+      orderEntity.qty = order.qty;
       orderEntity.save();
     });
     this.orderPool.push(reqOrder);
