@@ -56,13 +56,16 @@ export class OrderController {
   async getOrder(@Req() request: Request): Promise<string> {
     //console.log(JSON.stringify(request.body));
     const reqOrder: RequestedOrder = request.body;
-    reqOrder.order.forEach((order: SimpleOrder) => {
-      const orderEntity = new Order();
-      orderEntity.menu = order.menu;
-      orderEntity.qty = order.qty;
-      orderEntity.price = order.price;
-      orderEntity.save();
+    reqOrder.order.forEach(value => {
+
     });
+    // reqOrder.order.forEach((order: SimpleOrder) => {
+    //   const orderEntity = new Order();
+    //   orderEntity.menu = order.menu;
+    //   orderEntity.qty = order.qty;
+    //   orderEntity.price = order.price;
+    //   orderEntity.save();
+    // });
     this.orderPool.push(reqOrder);
     return '';
   }
