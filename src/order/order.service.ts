@@ -11,7 +11,7 @@ export class OrderService {
 
   async findOne(menu: string): Promise<Order> {
     return this.orderRepository.findOne({
-      where: {menu: menu}
+      where: { menu: menu }
     });
   }
 
