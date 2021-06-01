@@ -51,7 +51,7 @@ export class OrderController {
     return JSON.stringify(res);
   }
 
-  @Post('getorder/:order') // 받은 주문을 프론트(테이블)에게 배열 형태로 받아온다.
+  @Post('getorder') // 받은 주문을 프론트(테이블)에게 배열 형태로 받아온다.
   async getOrder(@Req() request: Request): Promise<string> {
     const reqOrder = JSON.parse(request.body);
     reqOrder.order.forEach(value => {
