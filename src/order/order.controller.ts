@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Req } from "@nestjs/common";
-import {  Request } from "express";
+import { Request } from "express";
 import { OrderService } from "./order.service";
 import { Order } from "../types/order.entity";
 import { OrderMenus, SimpleOrder } from "../types/order-menus.class";
@@ -14,8 +14,8 @@ export class OrderController {
     return "hello world";
   }
 
-  @Get('order/:order')
-  public async getOrder(@Req() request): Promise<string>{
+  @Get('ordermenu/:order')
+  public async getOrder(@Req() request: Request): Promise<string>{
     let res = { result:[] };
     const orderType = request.params.order;
     switch (orderType) {
