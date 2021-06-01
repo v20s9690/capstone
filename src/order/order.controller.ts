@@ -9,6 +9,11 @@ import { OrderMenus, SimpleOrder } from "../types/order-menus.class";
 export class OrderController {
   constructor(private OrderService: OrderService) {}
 
+  @Get()
+  category(@Req() request): string{
+    return "hello world";
+  }
+
   @Get('order/:order')
   public async getOrder(@Req() request): Promise<string>{
     let res = { result:[] };
