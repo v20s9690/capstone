@@ -27,6 +27,7 @@ export class OrderController {
           const order = this.orderPool[0];
           const strOrder = JSON.stringify(order);
           this.orderPool.splice(0);
+          return strOrder;
         }
         //
         // const orders = await this.orderService.findAll();
