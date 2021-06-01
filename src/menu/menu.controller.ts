@@ -8,14 +8,14 @@ import { CategoryMenus, SimpleMenu } from "../types/category-menus.class";
 export class MenuController {
   constructor(private menuService: MenuService) {}
 
-  @Get()
+  @Get() // 주소의 /menu에 들어갔을 때, hello world를 출력한다.(테스트용)
   category(@Req() request): string{
     return "hello world";
   }
 
-  @Get('category/:category')
+  @Get('category/:category') // 식당의 메뉴를 이중배열의 형태로 프론트에게 보내준다.
   async categoryAndMenus(@Req() request: Request): Promise<string> {
-    let res = { result: []};
+    let res = { result: [] };
     const categoryType = request.params.category;
     switch (categoryType) {
       case "all":

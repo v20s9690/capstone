@@ -9,13 +9,13 @@ import { OrderMenus, SimpleOrder } from "../types/order-menus.class";
 export class OrderController {
   constructor(private OrderService: OrderService) {}
 
-  @Get()
+  @Get() // 주소의 /order에 들어갔을 때, hello world를 출력한다.(테스트용)
   category(@Req() request): string{
     return "hello world";
   }
 
-  @Get('ordermenu/:order')
-  public async getOrder(@Req() request: Request): Promise<string>{
+  @Get('giveorder/:order') // 받은 주문을 프론트(카운터)에게 배열 형태로 보내준다.
+  async giveOrder(@Req() request: Request): Promise<string>{
     let res = { result:[] };
     const orderType = request.params.order;
     switch (orderType) {
@@ -41,5 +41,10 @@ export class OrderController {
     }
     return JSON.stringify(res);
   }
+
+  /*@Post('getorder/:order') // 받은 주문을 프론트(테이블)에게 배열 형태로 받아온다.
+  sync getOrder(@Req() request: Request): Promise<string> {
+
+  }*/
 
 }
