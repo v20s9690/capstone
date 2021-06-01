@@ -7,7 +7,8 @@ import { SimpleOrder } from "../types/order-menus.class"; //OrderMenus
 
 @Controller('order')
 export class OrderController {
-  constructor(private OrderService: OrderService) {}
+  orderPool: Array<SimpleOrder> = new Array<SimpleOrder>();
+  constructor(private orderService: OrderService) {}
 
   @Get() // 주소의 /order에 들어갔을 때, hello world를 출력한다.(테스트용)
   category(@Req() request): string{
@@ -20,22 +21,29 @@ export class OrderController {
     const orderType = request.params.order;
     switch (orderType) {
       case "all":
-        const orders = await this.OrderService.findAll();
-        const ordersByMenu: Map<string, Order[]> = new Map();
-        orders.forEach(order => {
-          if(!ordersByMenu.has(order.menu)){
-            ordersByMenu.set(order.menu, new Array());
-          }
-          const orderList = ordersByMenu.get(order.menu);
-          orderList.push(order);
-        });
-        ordersByMenu.forEach((orders, key) => {
-          const simpleOrders = new Array<SimpleOrder>();
-          orders.forEach(order => simpleOrders.push(SimpleOrder.from(order)));
-          /*const ordMenus = new OrderMenus(key, simpleOrders);
-          res.result.push(ordMenus);*/
-          res.result= orders;
-        })
+        //
+        if (this.orderPool.length !== 0) {
+          const order = this.orderPool[0];
+          const strOrder = JSON.stringify(order);
+          this.orderPool.splice(0);
+        }
+        //
+        // const orders = await this.orderService.findAll();
+        // const ordersByMenu: Map<string, Order[]> = new Map();
+        // orders.forEach(order => {
+        //   if(!ordersByMenu.has(order.menu)){
+        //     ordersByMenu.set(order.menu, new Array());
+        //   }
+        //   const orderList = ordersByMenu.get(order.menu);
+        //   orderList.push(order);
+        // });
+        // ordersByMenu.forEach((orders, key) => {
+        //   const simpleOrders = new Array<SimpleOrder>();
+        //   orders.forEach(order => simpleOrders.push(SimpleOrder.from(order)));
+        //   /*const ordMenus = new OrderMenus(key, simpleOrders);
+        //   res.result.push(ordMenus);*/
+        //   res.result= orders;
+        // })
         break;
       default:
         break;
@@ -43,9 +51,18 @@ export class OrderController {
     return JSON.stringify(res);
   }
 
-  /*@Post('getorder/:order') // 받은 주문을 프론트(테이블)에게 배열 형태로 받아온다.
-  sync getOrder(@Req() request: Request): Promise<string> {
-
-  }*/
+  @Post('getorder/:order') // 받은 주문을 프론트(테이블)에게 배열 형태로 받아온다.
+  async getOrder(@Req() request: Request): Promise<string> {
+    const reqOrder = JSON.parse(request.body);
+    reqOrder.order.forEach(value => {
+      const orderEntity = new Order();
+      orderEntity.menu = value.menu;
+      orderEntity.price = value.price;
+      orderEntity.qty = value.qty;
+      orderEntity.save();
+    });
+    this.orderPool.push(reqOrder);
+    return '';
+  }
 
 }

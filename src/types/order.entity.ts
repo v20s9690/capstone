@@ -1,8 +1,8 @@
-import { BaseEntity, Column, Entity } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: 'capstone_order' })
 export class Order extends BaseEntity {
-  @Column({ name: 'order_id', primary: true})
+  @PrimaryGeneratedColumn({ name: 'order_id'})
   id: number; //주문 순서를 위한 id
   @Column({ name: 'order_menu', length: 128, nullable: false })
   menu: string; //주문된 메뉴
