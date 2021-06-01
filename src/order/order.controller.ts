@@ -2,12 +2,13 @@ import { Controller, Get, Post, Req } from "@nestjs/common";
 import { Request } from "express";
 import { OrderService } from "./order.service";
 import { Order } from "../types/order.entity";
-import { SimpleOrder } from "../types/order-menus.class"; //OrderMenus
+import { SimpleOrder } from "../types/order-menus.class";
+import { RequestedOrder } from "../types/requested-order.class"; //OrderMenus
 
 
 @Controller('order')
 export class OrderController {
-  orderPool: Array<SimpleOrder> = new Array<SimpleOrder>();
+  orderPool: Array<RequestedOrder> = new Array<RequestedOrder>();
   constructor(private orderService: OrderService) {}
 
   @Get() // 주소의 /order에 들어갔을 때, hello world를 출력한다.(테스트용)
@@ -54,8 +55,8 @@ export class OrderController {
   @Post('getorder') // 받은 주문을 프론트(테이블)에게 배열 형태로 받아온다.
   async getOrder(@Req() request: Request): Promise<string> {
     //console.log(JSON.stringify(request.body));
-    const reqOrder = JSON.parse(request.body);
-    reqOrder.forEach((order: SimpleOrder) => {
+    const reqOrder: RequestedOrder = request.body;
+    reqOrder.order.forEach((order: SimpleOrder) => {
       const orderEntity = new Order();
       orderEntity.menu = order.menu;
       orderEntity.qty = order.qty;
