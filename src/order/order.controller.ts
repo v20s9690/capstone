@@ -34,6 +34,7 @@ export class OrderController {
           orders.forEach(order => simpleOrders.push(SimpleOrder.from(order)));
           /*const ordMenus = new OrderMenus(key, simpleOrders);
           res.result.push(ordMenus);*/
+          res.result.push(ordersByMenu);
         })
         break;
       default:
