@@ -8,7 +8,7 @@ import { Order } from "../types/order.entity";
 export class OrderController {
   constructor(private OrderService: OrderService) {}
 
-  @Get('/order')
+  @Get('/')
   public async getOrder(@Req() request): Promise<any>{
     let res = { result:[] };
     const orderType = request.params.order;
