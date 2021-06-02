@@ -11,5 +11,5 @@ export class Order extends BaseEntity {
   @Column({ name: 'order_price', nullable: false })
   price: number; //메뉴의 가격
   @Column({ name: 'order_tableNo', nullable: false})
-  tableNo: number;
+  tableNo: number; //주문한 테이블 No.
 }
