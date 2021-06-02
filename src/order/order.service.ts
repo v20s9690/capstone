@@ -19,9 +19,9 @@ export class OrderService {
     return this.orderRepository.find();
   }
 
- async findByMenu(menuName: string): Promise<Order[]> {
+ async findByTableNo(tableNo: string): Promise<Order[]> {
     return this.orderRepository.find({
-      where: {Menu: menuName},
+      where: {tableNo: tableNo},
       order: {menu: "ASC"}
     });
   }

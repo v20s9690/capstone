@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Req } from "@nestjs/common";
+import { Controller, Get, Param, Post, Req } from "@nestjs/common";
 import { Request } from "express";
 import { OrderService } from "./order.service";
 import { Order } from "../types/order.entity";
@@ -47,7 +47,7 @@ export class OrderController {
         //   res.result= orders;
         // })
         break;
-      default:
+        default:
         break;
     }
     return JSON.stringify(res);
@@ -66,8 +66,39 @@ export class OrderController {
       orderEntity.tableNo = order.tableNo;
       orderEntity.save();
     });
+    const timestamp = new Date().getTime();
     this.orderPool.push(reqOrder);
     return '';
   }
 
+  @Get('table/:table_no')
+  async fetchOrderByTableNo(@Param('table_no') tableNumbers: string[]): Promise<string> {
+    let simpleOrders = new Array<SimpleOrder>();
+    switch (tableNumbers.length) {
+      case 0:
+        break;
+      case 1:
+        const tableNumber = tableNumbers[0];
+        const orders = await this.orderService.findByTableNo(tableNumber);
+        orders.forEach(order => {
+          simpleOrders.push(SimpleOrder.from(order));
+        });
+        break;
+      default:
+        const tableOrders: Array<Array<Order>> = new Array<Array<Order>>();
+        for (const tableNumber of tableNumbers) {
+          const v = await this.orderService.findByTableNo(tableNumber);
+          tableOrders.push(v);
+        }
+        tableOrders.forEach(tableOrder => {
+          tableOrder.forEach(order => {
+            simpleOrders.push(SimpleOrder.from(order));
+          });
+        });
+        break;
+    }
+    return JSON.stringify({
+      'result': simpleOrders
+    });
+  }
 }

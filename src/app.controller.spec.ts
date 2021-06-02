@@ -19,5 +19,8 @@ describe('AppController', () => {
       // @ts-ignore
       expect(appController.getHello()).toBe('Hello World!');
     });
+
+    it ('should be current time', () => {
+    });
   });
 });
