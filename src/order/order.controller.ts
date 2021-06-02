@@ -62,6 +62,7 @@ export class OrderController {
       orderEntity.menu = order.menu;
       orderEntity.qty = order.qty;
       orderEntity.price = order.price;
+      orderEntity.tableNo = order.tableNo;
       orderEntity.save();
     });
     this.orderPool.push(reqOrder);
