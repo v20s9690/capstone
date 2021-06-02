@@ -57,6 +57,7 @@ export class OrderController {
   async getOrder(@Req() request: Request): Promise<string> {
     //console.log(JSON.stringify(request.body));
     const reqOrder: RequestedOrder = request.body;
+
     reqOrder.result.forEach((order: SimpleOrder) => {
       const orderEntity = new Order();
       orderEntity.menu = order.menu;
