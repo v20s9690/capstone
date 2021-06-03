@@ -113,6 +113,7 @@ export class OrderController {
         const orders = await this.orderService.findByTableNo(tableNumber);
         for (const order of orders) {
           order.purchase = true;
+          order.save();
         }
         break;
     }
