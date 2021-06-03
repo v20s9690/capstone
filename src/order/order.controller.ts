@@ -103,15 +103,16 @@ export class OrderController {
   }
 
   @Post('purchase/:table_no')
-  async purchaseByTableNo(@Param('table_no') tableNumbers: string[]): Promise<string> {
+  async purchaseByTableNo(@Param('table_no') tableNumbers: string): Promise<string> {
     let simpleOrders = new Array<SimpleOrder>();
-    console.log(`length: ${tableNumbers.length}`);
-    switch (tableNumbers.length) {
+    const o: {tables: Array<number>} = JSON.parse(`{ "tables": ${tableNumbers} }`);
+    console.log(JSON.stringify(o));
+    switch (o.tables.length) {
       case 0:
         break;
       default:
-        const tableNumber = tableNumbers[0];
-        const orders = await this.orderService.findByTableNo(tableNumber);
+        const tableNumber = o.tables[0];
+        const orders = await this.orderService.findByTableNo(tableNumber.toString(10));
         for (const order of orders) {
           order.purchase = true;
           await order.save();
