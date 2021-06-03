@@ -102,7 +102,7 @@ export class OrderController {
     });
   }
 
-  @Post('purchase/:table_no')
+  @Get('purchase/:table_no')
   async purchaseByTableNo(@Param('table_no') tableNumbers: string): Promise<string> {
     let simpleOrders = new Array<SimpleOrder>();
     const o: {tables: Array<number>} = JSON.parse(`{ "tables": ${tableNumbers} }`);
