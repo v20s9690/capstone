@@ -29,26 +29,27 @@ export class OrderController {
           this.orderPool.splice(0);
           return strOrder;
         }
-        //
-        // const orders = await this.orderService.findAll();
-        // const ordersByMenu: Map<string, Order[]> = new Map();
-        // orders.forEach(order => {
-        //   if(!ordersByMenu.has(order.menu)){
-        //     ordersByMenu.set(order.menu, new Array());
-        //   }
-        //   const orderList = ordersByMenu.get(order.menu);
-        //   orderList.push(order);
-        // });
-        // ordersByMenu.forEach((orders, key) => {
-        //   const simpleOrders = new Array<SimpleOrder>();
-        //   orders.forEach(order => simpleOrders.push(SimpleOrder.from(order)));
-        //   /*const ordMenus = new OrderMenus(key, simpleOrders);
-        //   res.result.push(ordMenus);*/
-        //   res.result= orders;
-        // })
-        break;
-        default:
-        break;
+      break;
+      case "recover":
+        const orders = await this.orderService.findAll();
+        const ordersByMenu: Map<string, Order[]> = new Map();
+        orders.forEach(order => {
+          if(!ordersByMenu.has(order.menu)){
+            ordersByMenu.set(order.menu, new Array());
+          }
+          const orderList = ordersByMenu.get(order.menu);
+          orderList.push(order);
+        });
+        ordersByMenu.forEach((orders, key) => {
+          const simpleOrders = new Array<SimpleOrder>();
+          orders.forEach(order => simpleOrders.push(SimpleOrder.from(order)));
+        //const ordMenus = new OrderMenus(key, simpleOrders);
+        //res.result.push(ordMenus);
+          res.result= orders;
+        });
+      break;
+      default:
+      break;
     }
     return JSON.stringify(res);
   }
