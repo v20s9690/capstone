@@ -10,6 +10,8 @@ export class Order extends BaseEntity {
   qty: number; //메뉴의 수량
   @Column({ name: 'order_price', nullable: false })
   price: number; //메뉴의 가격
-  @Column({ name: 'order_tableNo', nullable: false})
+  @Column({ name: 'order_tableNo', nullable: false })
   tableNo: number; //주문한 테이블 No.
+  @Column({ name: 'order_purchase', nullable: false, default: false })
+  purchase: boolean; //주문한 메뉴의 계산여부
 }

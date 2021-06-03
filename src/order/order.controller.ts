@@ -101,4 +101,23 @@ export class OrderController {
       'result': simpleOrders
     });
   }
+
+  @Post('purchase/:table_no')
+  async purchaseByTableNo(@Param('table_no') tableNumbers: string[]): Promise<string> {
+    let simpleOrders = new Array<SimpleOrder>();
+    switch (tableNumbers.length) {
+      case 0:
+        break;
+      default:
+        const tableNumber = tableNumbers[0];
+        const orders = await this.orderService.findByTableNo(tableNumber);
+        for (const order of orders) {
+          order.purchase = true;
+        }
+        break;
+    }
+    return JSON.stringify({
+      "result": true
+    });
+  }
 }

@@ -15,15 +15,17 @@ export class SimpleOrder {
   qty: number;
   price: number;
   tableNo: number;
+  purchase: boolean;
 
-  constructor(menu: string, qty: number, price: number, tableNo: number) {
+  constructor(menu: string, qty: number, price: number, tableNo: number, purchase: boolean) {
     this.menu = menu;
     this.qty = qty;
     this.price = price;
     this.tableNo = tableNo;
+    this.purchase = purchase
   }
 
   static from(order: Order): SimpleOrder {
-    return new SimpleOrder(order.menu, order.qty, order.price, order.tableNo);
-  }
+    return new SimpleOrder(order.menu, order.qty, order.price, order.tableNo, order.purchase);
+  }ㅂ
 }
