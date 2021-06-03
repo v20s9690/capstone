@@ -105,6 +105,7 @@ export class OrderController {
   @Post('purchase/:table_no')
   async purchaseByTableNo(@Param('table_no') tableNumbers: string[]): Promise<string> {
     let simpleOrders = new Array<SimpleOrder>();
+    console.log(`length: ${tableNumbers.length}`);
     switch (tableNumbers.length) {
       case 0:
         break;
