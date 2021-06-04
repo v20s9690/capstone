@@ -32,22 +32,23 @@ export class OrderController {
       break;
       case "recover":
         const orders = await this.orderService.findAll();
+        const result = new Array<SimpleOrder>();
         const ordersByMenu: Map<string, Order[]> = new Map();
         orders.forEach(order => {
           if(!ordersByMenu.has(order.menu)){
-            ordersByMenu.set(order.menu, new Array());
+            ordersByMenu.set(order.menu, []);
           }
           const orderList = ordersByMenu.get(order.menu);
           orderList.push(order);
         });
         ordersByMenu.forEach((orders, key) => {
-          const simpleOrders = new Array<SimpleOrder>();
-          orders.forEach(order => simpleOrders.push(SimpleOrder.from(order)));
+
+          orders.forEach(order => result.push(SimpleOrder.from(order)));
           //const ordMenus = new OrderMenus(key, simpleOrders);
           //res.result.push(ordMenus);
-          res.result = orders;
         });
-      break;
+        res.result = result;
+        break;
       default:
       break;
     }
