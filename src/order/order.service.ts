@@ -25,5 +25,4 @@ export class OrderService {
       order: {menu: "ASC"}
     });
   }
-
 }

@@ -30,7 +30,7 @@ export class OrderController {
           return strOrder;
         }
       break;
-      case "recover":
+      case "recovery":
         const orders = await this.orderService.findAll();
         const result = new Array<SimpleOrder>();
         const ordersByMenu: Map<string, Order[]> = new Map();
@@ -43,7 +43,10 @@ export class OrderController {
         });
         ordersByMenu.forEach((orders, key) => {
 
-          orders.forEach(order => result.push(SimpleOrder.from(order)));
+          orders.forEach(order => {
+            if (!order.purchase)
+              result.push(SimpleOrder.from(order))
+          });
           //const ordMenus = new OrderMenus(key, simpleOrders);
           //res.result.push(ordMenus);
         });
