@@ -43,9 +43,9 @@ export class OrderController {
         ordersByMenu.forEach((orders, key) => {
           const simpleOrders = new Array<SimpleOrder>();
           orders.forEach(order => simpleOrders.push(SimpleOrder.from(order)));
-          const ordMenus = new OrderMenus(key, simpleOrders);
-          res.result.push(ordMenus);
-          //res.result= orders;
+          //const ordMenus = new OrderMenus(key, simpleOrders);
+          //res.result.push(ordMenus);
+          res.result.push(orders);
         });
       break;
       default:
