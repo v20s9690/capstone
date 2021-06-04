@@ -1,6 +1,6 @@
 import { Order } from "./order.entity";
 
-/*export class OrderMenus {
+export class OrderMenus {
   name: string;
   menus: Array<SimpleOrder>;
 
@@ -8,7 +8,7 @@ import { Order } from "./order.entity";
     this.name = name;
     this.menus = menus;
   }
-}*/
+}
 
 export class SimpleOrder {
   menu: string;

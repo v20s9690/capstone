@@ -2,7 +2,7 @@ import { Controller, Get, Param, Post, Req } from "@nestjs/common";
 import { Request } from "express";
 import { OrderService } from "./order.service";
 import { Order } from "../types/order.entity";
-import { SimpleOrder } from "../types/order-menus.class";
+import { OrderMenus, SimpleOrder } from "../types/order-menus.class";
 import { RequestedOrder } from "../types/requested-order.class"; //OrderMenus
 
 
@@ -43,9 +43,9 @@ export class OrderController {
         ordersByMenu.forEach((orders, key) => {
           const simpleOrders = new Array<SimpleOrder>();
           orders.forEach(order => simpleOrders.push(SimpleOrder.from(order)));
-        //const ordMenus = new OrderMenus(key, simpleOrders);
-        //res.result.push(ordMenus);
-          res.result= orders;
+          const ordMenus = new OrderMenus(key, simpleOrders);
+          res.result.push(ordMenus);
+          //res.result= orders;
         });
       break;
       default:
