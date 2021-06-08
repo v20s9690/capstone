@@ -26,6 +26,7 @@ export class CallController {
     // });
     const result = JSON.stringify(this.tables);
     this.tables.clear();
-    return JSON.stringify({result: result});
+    // return JSON.stringify({result: result});
+    return "meeeerong";
   }
 }
