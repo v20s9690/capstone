@@ -12,6 +12,7 @@ import { MenuModule } from "./menu/menu.module";
 import { OrderModule } from "./order/order.module";
 import { OrderService } from "./order/order.service";
 import { OrderController } from "./order/order.controller";
+import { CallController } from "./call.controller";
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -27,7 +28,7 @@ import { OrderController } from "./order/order.controller";
     AccountModule, MenuModule, OrderModule
   ],
   exports: [TypeOrmModule],
-  controllers: [AppController, LoginController, MenuController, OrderController],
+  controllers: [AppController, LoginController, MenuController, OrderController, CallController],
   providers: [AppService, AuthenticatorService, AccountService, MenuService, OrderService]
 })
 export class AppModule {
