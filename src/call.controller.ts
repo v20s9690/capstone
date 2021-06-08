@@ -3,11 +3,12 @@ import { Request } from "express";
 
 @Controller('call')
 export class CallController {
-  private tables: Set<string>;
+  private tables: Set<string> = new Set();
 
   @Get('table/:table_no')
   async requestClerk(@Param('table_no') tableNumber: string): Promise<string> {
     let res = { result:[] };
+    console.log(tableNumber);
     if (tableNumber === undefined) {
       return JSON.stringify({ result: 'unable to convert to string or empty value'});
     }
