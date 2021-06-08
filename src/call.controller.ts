@@ -6,10 +6,12 @@ export class CallController {
   private tables: Set<string>;
 
   @Get('table/:table_no')
-  async requestClerk(@Param('table_no') tableNumbers: string): Promise<string> {
+  async requestClerk(@Param('table_no') tableNumber: string): Promise<string> {
     let res = { result:[] };
-    const tableNumber = JSON.parse(`table_no: { ${tableNumbers} }`);
-    this.tables = tableNumber.save();
+    if (tableNumber === undefined) {
+      return JSON.stringify({ result: 'unable to convert to string or empty value'});
+    }
+    this.tables.add(tableNumber);
     res.result.push(tableNumber);
     return JSON.stringify(res);
   }
