@@ -6,9 +6,9 @@ export class CallController {
   private tables: Set<string>;
 
   @Get('table/:table_no')
-  async requestClerk(@Req() request: Request): Promise<string> {
+  async requestClerk(@Param('table_no') tableNumbers: string): Promise<string> {
     let res = { result:[] };
-    const tableNumber = request.body;
+    const tableNumber = JSON.parse(`{ "tables": ${tableNumbers} }`);
     this.tables.add(tableNumber);
     res.result.push(tableNumber);
     return JSON.stringify(res);
