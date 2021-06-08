@@ -5,10 +5,10 @@ import { Request } from "express";
 export class CallController {
   private tables: Set<string>;
 
-  @Post('table/:table_no')
+  @Get('table/:table_no')
   async requestClerk(@Req() request: Request): Promise<string> {
     let res = { result:[] };
-    const tableNumber = request.params.table_no;
+    const tableNumber = request.body;
     this.tables.add(tableNumber);
     res.result.push(tableNumber);
     return JSON.stringify(res);
