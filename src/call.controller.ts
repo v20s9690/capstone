@@ -5,7 +5,7 @@ import { Request } from "express";
 export class CallController {
   private tables: Set<string>;
 
-  @Get('table/:table_no')
+  @Post('table/:table_no')
   async requestClerk(@Req() request: Request): Promise<string> {
     let res = { result:[] };
     const tableNumber = request.params.table_no;
