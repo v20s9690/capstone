@@ -8,8 +8,8 @@ export class CallController {
   @Get('table/:table_no')
   async requestClerk(@Param('table_no') tableNumbers: string): Promise<string> {
     let res = { result:[] };
-    const tableNumber = JSON.parse(`{ "tables": ${tableNumbers} }`);
-    this.tables.add(tableNumber);
+    const tableNumber = JSON.parse(`table_no: { ${tableNumbers} }`);
+    this.tables = tableNumber.save();
     res.result.push(tableNumber);
     return JSON.stringify(res);
   }
