@@ -20,7 +20,10 @@ export class CallController {
   @Get('table/alarm')
   async getRequests(@Req() request: Request): Promise<string> {
     const tables = new Set();
-    this.tables.forEach(value => tables.add(value));
+    this.tables.forEach((key, value, set) => {
+      console.log(`${key}, ${value}, ${set}`);
+      tables.add(value)
+    });
     const result = JSON.stringify(tables);
     this.tables.clear();
     return JSON.stringify({result: result});
