@@ -5,7 +5,7 @@ import { Request } from "express";
 export class CallController {
   private tables: Set<string> = new Set();
 
-  @Get('table/:table_no')
+  @Get('table/number/:table_no')
   async requestClerk(@Param('table_no') tableNumber: string): Promise<string> {
     let res = { result:[] };
     console.log(tableNumber);
@@ -20,13 +20,12 @@ export class CallController {
   @Get('table/alarm')
   async getRequests(@Req() request: Request): Promise<string> {
     const tables = new Set();
-    // this.tables.forEach((key, value, set) => {
-    //   console.log(`${key}, ${value}, ${set}`);
-    //   tables.add(value)
-    // });
+    this.tables.forEach((key, value, set) => {
+      console.log(`${key}, ${value}, ${set}`);
+      tables.add(value)
+    });
     const result = JSON.stringify(this.tables);
     this.tables.clear();
-    // return JSON.stringify({result: result});
-    return "meeeerong";
+    return JSON.stringify({result: result});
   }
 }
